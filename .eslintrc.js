@@ -5,11 +5,11 @@ module.exports = {
   extends: [
     'react-app',
     'react-app/jest',
-    // react17 이상에 내장된 jsx-runtime을 사용함을 react플러그인에 공지
+    // react17 이상에 내장된 jsx-runtime의 사용을 react플러그인을 사용해 명시함
     'plugin:react/jsx-runtime'
   ],
   // 플러그인 목록
-  plugins: ['@typescript-eslint', 'functional', 'react'],
+  plugins: ['@typescript-eslint', 'functional', 'react', 'unused-imports'],
   // 전역 변수를 다루는 방법을 설정한다
   // https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments
   env: {
@@ -46,7 +46,8 @@ module.exports = {
         // 명시적으로 any를 사용할 수 없다
         '@typescript-eslint/no-explicit-any': ['error'],
         // 선언한 변수는 반드시 사용해야 한다
-        '@typescript-eslint/no-unused-vars': ['error'],
+        // eslint-plugin-unused-imports 플로그인과 충돌하므로 끔
+        '@typescript-eslint/no-unused-vars': ['off'],
         // 숫자와 문자열에 + 연산자를 사용할 수 없다
         '@typescript-eslint/restrict-plus-operands': ['error'],
         // 대괄호 연산자를 연속해서 호출할 수 없다
@@ -170,7 +171,11 @@ module.exports = {
         // findDOMNode 메소드는 사용할 수 없다
         'react/no-find-dom-node': ['error'],
         // ref로 string을 넘길 수 없다
-        'react/no-string-refs': ['error']
+        'react/no-string-refs': ['error'],
+        // 사용하지 않는 import 구문은 삭제한다
+        'unused-imports/no-unused-imports': ['error'],
+        // 사용하지 않는 변수는 삭제한다
+        'unused-imports/no-unused-vars' : ['error'],
       }
     }
   ]

@@ -6,10 +6,12 @@ module.exports = {
     'react-app',
     'react-app/jest',
     // react17 이상에 내장된 jsx-runtime의 사용을 react플러그인을 사용해 명시함
-    'plugin:react/jsx-runtime'
+    'plugin:react/jsx-runtime',
+    // import 플러그인을 활성화함
+    'plugin:import/typescript'
   ],
   // 플러그인 목록
-  plugins: ['@typescript-eslint', 'functional', 'react', 'unused-imports'],
+  plugins: ['@typescript-eslint', 'functional', 'react', 'unused-imports', 'import'],
   // 전역 변수를 다루는 방법을 설정한다
   // https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments
   env: {
@@ -19,6 +21,22 @@ module.exports = {
     node: true
   },
   overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        // 문자열 선언에는 작은 따옴표를 사용한다
+        quotes: [
+          'error',
+          'single',
+          {
+            'avoidEscape': true,
+            'allowTemplateLiterals': true
+          }
+        ],
+        // 띄워쓰기는 스페이스문자 2개
+        'indent': ['error', 2],
+      }
+    },
     {
       files: ['**/*.ts?(x)'],
       parserOptions: {
@@ -58,6 +76,8 @@ module.exports = {
         '@typescript-eslint/no-empty-interface': ['error'],
         // 선언 후에 사용해야 한다
         '@typescript-eslint/no-use-before-define': ['error'],
+        // 띄워쓰기는 스페이스문자 2개
+        'indent': ['error', 2],
         // Function.prototype.apply() 를 사용할 때는 spread 연산자를 사용해야 한다
         'prefer-spread': ['error'],
         // 선언한 표현식은 반드시 사용해야 한다
@@ -109,7 +129,8 @@ module.exports = {
             'defaultAssignment': false
           }
         ],
-        'quotes': [
+        // 문자열 선언에는 작은 따옴표를 사용한다
+        quotes: [
           'error',
           'single',
           {
@@ -134,13 +155,14 @@ module.exports = {
         // 세미콜론 사용금지
         'semi': ['error', 'never'],
         // import문은 정렬되어 있어야 한다
-        'sort-imports': ['error'],
+        // eslint-plugin-import의 룰을 사용할 것이므로 명시적으로 끔
+        'sort-imports': ['off'],
         // console.log는 사용할 수 없다
         'no-console': [
           'error',
-            {
-                'allow': ['warn', 'error']
-            }
+          {
+            'allow': ['warn', 'error']
+          }
         ],
         // boolean 값을 props로 넘길 때는 우변을 생략한다
         'react/jsx-boolean-value': ['error'],
@@ -175,7 +197,30 @@ module.exports = {
         // 사용하지 않는 import 구문은 삭제한다
         'unused-imports/no-unused-imports': ['error'],
         // 사용하지 않는 변수는 삭제한다
-        'unused-imports/no-unused-vars' : ['error'],
+        'unused-imports/no-unused-vars': ['error'],
+        // 스스로를 import 할 수 없다
+        'import/no-self-import': ['error'],
+        // dynamic import에는 반드시 chunk name이 있어야 한다
+        'import/dynamic-import-chunkname': ['error'],
+        // 익명으로 default export는 할 수 없다
+        'import/no-anonymous-default-export': ['error'],
+        // import문 다음 1줄은 공백이어야 한다
+        'import/newline-after-import': ['error', { 'count': 1 }],
+        // import문은 정렬되어 있어야 한다
+        'import/order': ['error',       {
+          groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+          'newlines-between': 'always',
+        }],
+        // 출처가 같은 곳에서 중복 import를 할 수 없다
+        'import/no-duplicates': ['error'],
+        // commonjs 문법을 사용할 수 없다
+        'import/no-commonjs': ['error'],
+        // 불필요한 path segment를 사용할 수 없다
+        'import/no-useless-path-segments': ['error'],
       }
     }
   ]

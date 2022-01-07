@@ -21,14 +21,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix . --ext .tsx,.ts"
+    "lint": "eslint --fix . --ext .tsx,.ts",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
+    "@types/eslint": "^8.2.2",
+    "@types/prettier": "^2.4.2",
     "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^8.6.0",
     "eslint-plugin-functional": "^4.0.2",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.5.1",
     "tsutils": "^3.21.0"
   }
 }

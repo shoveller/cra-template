@@ -6,18 +6,21 @@ const functionalRules = {
   // 반복문은 사용할 수 없다
   'functional/no-loop-statement': ['error'],
   // rest parameter 사용을 제한한다
-  'functional/functional-parameters': ['error', {
-    allowRestParameter: false,
-    allowArgumentsKeyword: false,
-    enforceParameterCount: false
-  }],
+  'functional/functional-parameters': [
+    'error',
+    {
+      allowRestParameter: false,
+      allowArgumentsKeyword: false,
+      enforceParameterCount: false,
+    },
+  ],
 }
 
-const javascriptRules = {
+const eslintRules = {
   // var는 사용할 수 없다
   'no-var': ['error'],
   // 띄워쓰기는 스페이스문자 2개
-  'indent': ['error', 2],
+  indent: ['error', 2],
   // Function.prototype.apply() 를 사용할 때는 spread 연산자를 사용해야 한다
   'prefer-spread': ['error'],
   // 선언한 표현식은 반드시 사용해야 한다
@@ -50,55 +53,56 @@ const javascriptRules = {
   'max-depth': [
     'error',
     {
-      'max': 1
-    }
+      max: 1,
+    },
   ],
   // return 문 이전에는 반드시 빈 줄이 있어야 한다
   'padding-line-between-statements': [
     'error',
     {
-      'blankLine': 'always',
-      'prev': '*',
-      'next': 'return'
-    }
+      blankLine: 'always',
+      prev: '*',
+      next: 'return',
+    },
   ],
   // 삼항연산자를 허용하지 않는다
   'no-unneeded-ternary': [
     'error',
     {
-      'defaultAssignment': false
-    }
+      defaultAssignment: false,
+    },
   ],
   // 문자열 선언에는 홑 따옴표를 사용한다
   quotes: [
     'error',
     'single',
     {
-      'avoidEscape': true,
-      'allowTemplateLiterals': true
-    }
+      avoidEscape: true,
+      allowTemplateLiterals: true,
+    },
   ],
   // computed property 앞뒤에는 공백이 있어야 한다.
   'computed-property-spacing': [
     'error',
     'never',
     {
-      'enforceForClassMembers': true
-    }
+      enforceForClassMembers: true,
+    },
   ],
   // 중첩된 object 앞뒤에는 공백이 있어야 한다.
   'object-curly-spacing': ['error', 'always'],
   // 중첩된 배열 앞뒤에는 공백이 있으면 안된다
   'array-bracket-spacing': ['error', 'never'],
   // 세미콜론 사용금지
-  'semi': ['error', 'never'],
+  // prettiier를 사용할 것이므로 명시적으로 끔
+  semi: ['off'],
   // import문은 정렬되어 있어야 한다
   // eslint-plugin-import의 룰을 사용할 것이므로 명시적으로 끔
   'sort-imports': ['off'],
   // 중괄호의 스타일을 통일
   'brace-style': ['error'],
   // statemnet는 반드시 중괄호로 감싸야 하고 1줄 이상으로 작성해야 한다
-  'curly': ['error', 'multi-line', 'consistent'],
+  curly: ['error', 'multi-line', 'consistent'],
   // debugger 는 사용을 권장하지 않는다
   'no-debugger': ['warn'],
   // no-alert 룰과 충돌하므로 끔
@@ -109,12 +113,15 @@ const javascriptRules = {
   'no-console': [
     'warn',
     {
-      'allow': ['warn', 'error']
-    }
+      allow: ['warn', 'error'],
+    },
   ],
+  // jsx에는 쌍 따옴표를 사용해야 한다.
+  // prettier를 사용할 것으므로 끔
+  'jsx-quotes': ['error', 'prefer-double'],
 }
 
-const typescriptRules = {
+const tslintRules = {
   // 명시적으로 any를 사용할 수 없다
   '@typescript-eslint/no-explicit-any': ['error'],
   // 선언한 변수는 반드시 사용해야 한다
@@ -132,13 +139,14 @@ const typescriptRules = {
   '@typescript-eslint/no-use-before-define': ['error'],
 }
 
-const reactRules = {
+const reactHookRules = {
   // hook은 반드시 react 함수 안에서 호출해야 한다
   'react-hooks/rules-of-hooks': ['error'], // Checks rules of Hooks
   // hook의 dep array는 반드시 지켜야 한다
   'react-hooks/exhaustive-deps': ['error'], // Checks effect dependencies
-// jsx에는 쌍 따옴표를 사용해야 한다.
-  'jsx-quotes': ['error', 'prefer-double'],
+}
+
+const reactRules = {
   // boolean 값을 props로 넘길 때는 우변을 생략한다
   'react/jsx-boolean-value': ['error'],
   // jsx의 닫는 꺽쇠는 정렬해야 한다
@@ -146,7 +154,7 @@ const reactRules = {
   // jsx의 닫는 태그는 정렬해야 한다
   'react/jsx-closing-tag-location': ['error'],
   // jsx의 props는 2칸을 띄워야 한다
-  'react/jsx-indent-props': [2, { indentMode: 2, ignoreTernaryOperator: true}],
+  'react/jsx-indent-props': [2, { indentMode: 2, ignoreTernaryOperator: true }],
   // javascript url은 사용할 수 없다
   'react/jsx-no-script-url': ['error'],
   // 불필요한 플래그먼트 금지
@@ -171,11 +179,14 @@ const reactRules = {
   'react/no-string-refs': ['error'],
 }
 
-const importRules = {
-// 사용하지 않는 import 구문은 삭제한다
+const unusedImportRules = {
+  // 사용하지 않는 import 구문은 삭제한다
   'unused-imports/no-unused-imports': ['error'],
   // 사용하지 않는 변수는 삭제한다
   'unused-imports/no-unused-vars': ['error'],
+}
+
+const importRules = {
   // 스스로를 import 할 수 없다
   'import/no-self-import': ['error'],
   // dynamic import에는 반드시 chunk name이 있어야 한다
@@ -183,16 +194,19 @@ const importRules = {
   // 익명으로 default export는 할 수 없다
   'import/no-anonymous-default-export': ['error'],
   // import문 다음 1줄은 공백이어야 한다
-  'import/newline-after-import': ['error', { 'count': 1 }],
+  'import/newline-after-import': ['error', { count: 1 }],
   // import문은 정렬되어 있어야 한다
-  'import/order': ['error',       {
-    groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
-    alphabetize: {
-      order: 'asc',
-      caseInsensitive: true,
+  'import/order': [
+    'error',
+    {
+      groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
+      alphabetize: {
+        order: 'asc',
+        caseInsensitive: true,
+      },
+      'newlines-between': 'always',
     },
-    'newlines-between': 'always',
-  }],
+  ],
   // 출처가 같은 곳에서 중복 import를 할 수 없다
   'import/no-duplicates': ['error'],
   // commonjs 문법을 사용할 수 없다
@@ -211,31 +225,39 @@ module.exports = {
     // react17 이상에 내장된 jsx-runtime의 사용을 react플러그인을 사용해 명시함
     'plugin:react/jsx-runtime',
     // import 플러그인을 활성화함
-    'plugin:import/typescript'
+    'plugin:import/typescript',
   ],
   // 플러그인 목록
-  plugins: ['@typescript-eslint', 'functional', 'react', 'unused-imports', 'import'],
+  plugins: [
+    '@typescript-eslint',
+    'functional',
+    'react',
+    'unused-imports',
+    'import',
+  ],
   // 허용하는 전역 변수 목록을 명시한다
   // https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments
   env: {
     es2021: true,
     browser: true,
     jest: true,
-    node: true
+    node: true,
   },
   overrides: [
     {
       files: ['**/*.ts?(x)'],
       parserOptions: {
-        project: ['./tsconfig.json']
+        project: ['./tsconfig.json'],
       },
       rules: {
+        ...eslintRules,
+        ...tslintRules,
         ...functionalRules,
-        ...typescriptRules,
-        ...javascriptRules,
-        ...reactRules,
         ...importRules,
-      }
-    }
-  ]
+        ...unusedImportRules,
+        ...reactRules,
+        ...reactHookRules,
+      },
+    },
+  ],
 }

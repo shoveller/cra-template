@@ -215,7 +215,7 @@ module.exports = {
   ],
   // 플러그인 목록
   plugins: ['@typescript-eslint', 'functional', 'react', 'unused-imports', 'import'],
-  // 전역 변수를 다루는 방법을 설정한다
+  // 허용하는 전역 변수 목록을 명시한다
   // https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments
   env: {
     es2021: true,

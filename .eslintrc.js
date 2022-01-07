@@ -99,13 +99,15 @@ const javascriptRules = {
   'brace-style': ['error'],
   // statemnet는 반드시 중괄호로 감싸야 하고 1줄 이상으로 작성해야 한다
   'curly': ['error', 'multi-line', 'consistent'],
-  // debugger 는 사용할 수 없다
-  'no-debugger': ['error'],
-  // alert, confirm, prompt 는 사용할 수 없다
-  'no-alert': ['error'],
+  // debugger 는 사용을 권장하지 않는다
+  'no-debugger': ['warn'],
+  // no-alert 룰과 충돌하므로 끔
+  'no-restricted-globals': ['off'],
+  // alert, confirm, prompt 는 사용을 권장하지 않는다
+  'no-alert': ['warn'],
   // console.log 는 사용할 수 없다
   'no-console': [
-    'error',
+    'warn',
     {
       'allow': ['warn', 'error']
     }

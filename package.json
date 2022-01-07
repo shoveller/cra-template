@@ -25,7 +25,6 @@
     "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "@types/eslint": "^8.2.2",
     "@types/prettier": "^2.4.2",
     "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^8.6.0",

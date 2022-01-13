@@ -7,5 +7,5 @@ module.exports = {
     // 코드 포맷팅
     () => 'npm run prettier',
   ],
-  '**/*.{js,jsx,json}': ['npm run prettier'],
+  '**/*.{js,jsx,json}': [() => 'npm run prettier'],
 }

@@ -12,7 +12,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --cache --fix . --ext .tsx,.ts",
-    "prettier": "prettier --write .",
+    "prettier": "prettier --ignore-unknown --write .",
     "prepare": "husky install"
   },
   "devDependencies": {

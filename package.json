@@ -11,12 +11,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --cache --fix . --ext .tsx,.ts",
+    "lint": "eslint --fix . --ext .tsx,.ts",
     "prettier": "prettier --ignore-unknown --write .",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "react-scripts": "^5.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -33,8 +32,11 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.1.7",
     "prettier": "^2.5.1",
+    "prettier-config-cinos": "^1.0.0",
+    "react-scripts": "^5.0.0",
     "tsutils": "^3.21.0",
     "typescript": "^4.5.4",
     "web-vitals": "^2.1.2"
-  }
+  },
+  "prettier": "prettier-config-cinos"
 }
